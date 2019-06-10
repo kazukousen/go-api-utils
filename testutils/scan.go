@@ -25,6 +25,9 @@ func ScanBody(ct ContentType, body io.Reader, p string) (got string, err error) 
 		got, err = scanJSON(body, p)
 	case XML:
 		got, err = scanXML(body, p)
+	default:
+		err = xerrors.Errorf("unimplemented: %s", ct)
+		return
 	}
 	got = strings.TrimRight(got, "\n")
 	return
