@@ -1,19 +1,19 @@
-package httputils_test
+package testutils_test
 
 import (
 	"strings"
 	"testing"
 
-	"github.com/kazukousen/go-api-utils/httputils"
+	"github.com/kazukousen/go-api-utils/testutils"
 )
 
 func TestScanBody(t *testing.T) {
 	tests := []struct {
 		desc          string
-		ct            httputils.ContentType
+		ct            testutils.ContentType
 		body, p, want string
 	}{
-		{desc: "scanJSON", ct: httputils.JSON, body: `
+		{desc: "scanJSON", ct: testutils.JSON, body: `
 		{
 			"foo": [
 				{"bar": "baz"},
@@ -21,7 +21,7 @@ func TestScanBody(t *testing.T) {
 			]
 		}
 		`, p: "/foo[1]/bar", want: "faz"},
-		{desc: "scanXML", ct: httputils.XML, body: `
+		{desc: "scanXML", ct: testutils.XML, body: `
 		<Foo>
 			<Bar>baz</Bar>
 			<Bar>faz</Bar>
@@ -33,7 +33,7 @@ func TestScanBody(t *testing.T) {
 		tt := tt
 		t.Run(tt.desc, func(t *testing.T) {
 			t.Parallel()
-			got, err := httputils.ScanBody(tt.ct, strings.NewReader(tt.body), tt.p)
+			got, err := testutils.ScanBody(tt.ct, strings.NewReader(tt.body), tt.p)
 			if err != nil {
 				t.Errorf("could not scan body: %+v", err)
 			}

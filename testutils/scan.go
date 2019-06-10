@@ -1,4 +1,4 @@
-package httputils
+package testutils
 
 import (
 	"io"
@@ -14,8 +14,8 @@ type ContentType string
 
 // content-type
 const (
-	JSON ContentType = "json"
-	XML  ContentType = "xml"
+	JSON ContentType = "application/json"
+	XML  ContentType = "application/xml"
 )
 
 // ScanBody ...
