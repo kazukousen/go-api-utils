@@ -3,6 +3,7 @@ module github.com/kazukousen/go-api-utils
 go 1.12
 
 require (
+	github.com/google/uuid v1.1.1
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/mattn/go-scan v0.0.0-20161028081550-c32d62d79baf
 	golang.org/x/net v0.0.0-20190607181551-461777fb6f67 // indirect
