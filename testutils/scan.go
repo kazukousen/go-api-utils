@@ -27,7 +27,9 @@ func ScanBody(ct ContentType, body io.Reader, p string) (got string, err error) 
 		got, err = scanXML(body, p)
 	default:
 		err = xerrors.Errorf("unimplemented: %s", ct)
-		return
+	}
+	if err != nil {
+		return "", err
 	}
 	got = strings.TrimRight(got, "\n")
 	return
