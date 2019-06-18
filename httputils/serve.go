@@ -8,6 +8,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // Serve ...
@@ -22,6 +24,10 @@ func Serve(h http.Handler) {
 		if err := srv.ListenAndServe(); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
+	}()
+
+	go func() {
+		http.ListenAndServe(":9090", promhttp.Handler())
 	}()
 
 	quit := make(chan os.Signal, 1)
