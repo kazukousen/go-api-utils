@@ -16,8 +16,9 @@ import (
 func Serve(h http.Handler) {
 
 	srv := http.Server{
-		Addr:    ":8080",
-		Handler: h,
+		Addr:              ":8080",
+		Handler:           h,
+		ReadHeaderTimeout: 5 * time.Second,
 	}
 
 	go func() {
@@ -27,7 +28,12 @@ func Serve(h http.Handler) {
 	}()
 
 	go func() {
-		http.ListenAndServe(":9090", promhttp.Handler())
+		srv := http.Server{
+			Addr:              ":9200",
+			Handler:           promhttp.Handler(),
+			ReadHeaderTimeout: 5 * time.Second,
+		}
+		srv.ListenAndServe()
 	}()
 
 	quit := make(chan os.Signal, 1)
