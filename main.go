@@ -9,6 +9,7 @@ import (
 
 func main() {
 	r := chi.NewRouter()
+	r.Use(httputils.Middlewares...)
 
 	r.Get("/echo", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")

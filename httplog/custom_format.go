@@ -59,7 +59,7 @@ type logEntry struct {
 func (l logEntry) Write(status, bytes int, elapsed time.Duration) {
 	timeFormatted := time.Now().Format("02/Jan/2006 03:04:05")
 	fmt.Fprintf(l.writer, apacheFormatPattern, l.ip, timeFormatted, l.method,
-		l.uri, l.protocol, status, bytes, l.referer, l.userAgent, elapsed.Seconds(), l.reqID)
+		l.uri, l.protocol, status, bytes, l.referer, l.userAgent, elapsed.Seconds()*1000, l.reqID)
 }
 
 func (l logEntry) Panic(v interface{}, stack []byte) {
