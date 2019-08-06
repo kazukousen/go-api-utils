@@ -7,6 +7,11 @@ import (
 	"github.com/kazukousen/go-api-utils/httputils"
 )
 
+var (
+	// ShortSHA ...
+	ShortSHA string
+)
+
 func main() {
 	r := chi.NewRouter()
 	r.Use(httputils.Middlewares...)
